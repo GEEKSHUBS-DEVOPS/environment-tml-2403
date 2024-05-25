@@ -1,0 +1,36 @@
+services:
+  microservicio-a:
+    build: 
+      context: ./builds/nestjs
+    working_dir: /app
+    volumes:
+      - ./src/microservicio-a:/app
+    command: ['npm', 'start']
+    ports: 
+      - 3000:3000
+    environment:
+      - microb=microservicio-b
+    depends_on:
+      - microservicio-b
+  microservicio-b:
+    build: 
+      context: ./builds/nestjs
+    working_dir: /app
+    volumes:
+      - ./src/microservicio-b:/app
+    command: ['npm', 'start']
+  webapp:
+    build: 
+      context: ./builds/angular
+    working_dir: /app
+    volumes:
+      - ./src/webapp:/app
+    command: ['npm', 'start']
+    ports:
+      - 4200:4200
+  redis:
+    build: 
+      context: ./builds/redis
+  mongodb:
+    build: 
+      context: ./builds/redis

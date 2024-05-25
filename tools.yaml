@@ -1,0 +1,15 @@
+services:
+  ng: 
+    build: 
+      context: ./builds/angular
+    working_dir: /app
+    volumes:
+      - ./src:/app
+    command: ['bash']
+  nestjs: 
+    build: 
+      context: ./builds/nestjs
+    working_dir: /app
+    volumes:
+      - ./src:/app
+    command: ['bash']
